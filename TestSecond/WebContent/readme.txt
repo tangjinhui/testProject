@@ -1,0 +1,1 @@
+create table photo( id int NOT null auto_increment PRIMARY KEY, NAME VARCHAR(256) COMMENT'图片名称',photo BLOB COMMENT'照片')
