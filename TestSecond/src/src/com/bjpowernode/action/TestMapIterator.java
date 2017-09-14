@@ -5,33 +5,39 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+
+import src.com.bjpowernode.entity.City;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import src.com.bjpowernode.entity.City;
-
-import java.util.Set;
-
 /**
- * 类TestMapIterator.java的实现描述：TODO 类实现描述
- *  map的遍历四种方式
+ * 类TestMapIterator.java的实现描述：TODO 类实现描述 map的遍历四种方式
+ * 
  * @author tangjinhui 2017年3月31日 下午5:43:29
  */
 public class TestMapIterator {
+
     public static void main(String[] args) {
+        City city = new City();
+        if (city == null) {
+            System.out.println("null");
+        } else {
+            System.out.println("city");
+        }
         Map<String, String> map = new HashMap<String, String>();
         map.put("1", "value1");
         map.put("2", "value2");
         map.put("3", "value3");
-        //第一种：普遍使用，二次取值
-        //        System.out.println("通过Map.keySet遍历key和value：");
+        // 第一种：普遍使用，二次取值
+        // System.out.println("通过Map.keySet遍历key和value：");
         for (String key : map.keySet()) {
             System.out.println("key= " + key + " and value= " + map.get(key));
         }
-        //第二种
+        // 第二种
         System.out.println("通过Map.entrySet使用iterator遍历key和value：");
 
         Set<Entry<String, String>> entrySet = map.entrySet();
@@ -40,13 +46,13 @@ public class TestMapIterator {
             Entry<String, String> entry = iterator.next();
             System.out.println(entry.getKey() + entry.getValue());
         }
-        //第三种：推荐，尤其是容量大时
+        // 第三种：推荐，尤其是容量大时
         System.out.println("通过Map.entrySet遍历key和value");
         for (Map.Entry<String, String> entry : entrySet) {
             System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
         }
 
-        //第四种
+        // 第四种
         System.out.println("通过Map.values()遍历所有的value，但不能遍历key");
         for (String v : map.values()) {
             System.out.println("value= " + v);
@@ -65,11 +71,20 @@ public class TestMapIterator {
         attachmentList.add(city3);
 
         Map<Integer, City> map1 = Maps.uniqueIndex(attachmentList, new Function<City, Integer>() {
+
             @Override
             public Integer apply(City input) {
                 return input.getCid();
             }
         });
+        Map<String, String> map12 = new HashMap<String, String>() {
+
+            private static final long serialVersionUID = 1L;
+            {
+                put("name", "001");
+                put("age", "23");
+            }
+        };
         System.out.println("Map的值" + JSON.toJSON(map1));
 
     }
